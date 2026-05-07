@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Manrope:wght@400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #0A0A0A;
+  --color-surface: #141414;
+  --color-green: #1A6B3C;
+  --color-green-light: #22894e;
+  --color-text: #F5F5F0;
+  --color-muted: #A0A0A0;
+  --color-gold: #c9a84c;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-arabic: 'Noto Kufi Arabic', sans-serif;
+}
+
+html {
+  background: var(--color-bg);
+  overflow-x: hidden;
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-green); border-radius: 4px; }
+
+/* ── Main layout container ── */
+.main-content {
+  width: min(1700px, 96vw);
+  margin: 0 auto;
+  padding-top: 5rem;
+  padding-bottom: 2.5rem;
+  display: grid;
+  gap: 1.6rem;
+}
+
+/* ── Islamic geometric pattern ── */
+.geometric-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%231A6B3C' stroke-width='0.5' opacity='0.15'%3E%3Cpolygon points='60,10 110,40 110,80 60,110 10,80 10,40'/%3E%3Cpolygon points='60,25 95,45 95,75 60,95 25,75 25,45'/%3E%3Cline x1='60' y1='10' x2='60' y2='25'/%3E%3Cline x1='110' y1='40' x2='95' y2='45'/%3E%3Cline x1='110' y1='80' x2='95' y2='75'/%3E%3Cline x1='60' y1='110' x2='60' y2='95'/%3E%3Cline x1='10' y1='80' x2='25' y2='75'/%3E%3Cline x1='10' y1='40' x2='25' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* ── Marquee animations ── */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track-left  { animation: marquee-left  30s linear infinite; }
+.marquee-track-right { animation: marquee-right 25s linear infinite; }
+.marquee-wrapper:hover .marquee-track-left,
+.marquee-wrapper:hover .marquee-track-right {
+  animation-play-state: paused;
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(10,10,10,0.70);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+}
+
+/* ── Bento card ── */
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.45s ease, transform 0.4s ease;
+}
+.bento-card:hover {
+  border-color: rgba(26,107,60,0.4);
+  transform: translateY(-3px);
+}
+.bento-card:hover img { transform: scale(1.06); }
+.bento-card:hover .prog-arrow {
+  background: var(--color-green) !important;
+  border-color: var(--color-green) !important;
+  color: #fff !important;
+}
+
+/* ── Proof sticky ── */
+.proof-sticky {
+  position: sticky;
+  top: 110px;
+}
+
+/* ── Utilities ── */
+.text-green  { color: var(--color-green); }
+.text-gold   { color: var(--color-gold); }
+
+/* ================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================ */
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .main-content {
+    width: min(1200px, 95vw);
+    gap: 1.4rem;
+    padding-top: 4.5rem;
+  }
+}
+
+/* ── Mobile Large (≤640px) ── */
+@media (max-width: 640px) {
+  .main-content {
+    width: 100%;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    padding-top: 4rem;
+    gap: 1rem;
+  }
+
+  #hero {
+    border-radius: 0.6rem !important;
+  }
+
+  /* Camping cards: 2 col */
+  .camping-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+}
+
+/* ── Mobile Small (≤480px) ── */
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 3.8rem;
+    gap: 0.8rem;
+  }
+
+  .camping-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  footer > div:nth-child(2) {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+}

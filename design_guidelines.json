@@ -1,0 +1,130 @@
+{
+  "theme": "dark",
+  "archetype": "Archetype 5 (Jewel & Luxury) mixed with Archetype 1 (Organic & Earthy)",
+  "colors": {
+    "primary": "#0A0A0A",
+    "secondary": "#1A6B3C",
+    "accent": "#F5F5F0",
+    "text_primary": "#F5F5F0",
+    "text_secondary": "#A0A0A0",
+    "background_base": "#0A0A0A",
+    "surface": "#141414",
+    "surface_glass": "rgba(10, 10, 10, 0.7)",
+    "border_subtle": "rgba(255, 255, 255, 0.05)"
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Outfit",
+      "body": "Manrope",
+      "accent": "Amiri"
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter leading-none font-bold",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight font-bold",
+      "h3": "text-xl sm:text-2xl leading-snug font-semibold",
+      "body": "text-base leading-relaxed text-[#F5F5F0]/80",
+      "label": "text-sm uppercase tracking-[0.2em] text-[#1A6B3C] font-semibold"
+    }
+  },
+  "layout": {
+    "spacing": "py-24 lg:py-32",
+    "container": "max-w-7xl mx-auto px-6 sm:px-8 lg:px-12",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8"
+  },
+  "animations": {
+    "library": "GSAP + ScrollTrigger + Lenis",
+    "rules": [
+      "Use Lenis for smooth scrolling momentum on the entire wrapper.",
+      "Use GSAP ScrollTrigger for pinned sections (like the Philosophy section) and horizontal scroll (Identity Reel).",
+      "Split Hero: Left side text staggered entrance, right side image parallax reveal.",
+      "Identity Reel: Horizontal draggable scroll pinned over vertical scroll.",
+      "Philosophy Section: Pinned background, text highlights progressively as user scrolls.",
+      "Proof Strip: Left column sticky, right column normal scroll.",
+      "Marquee: Auto-scrolling ticker for voice testimonials using GSAP or react-fast-marquee."
+    ]
+  },
+  "components": {
+    "nav": "Floating glass-morphism: backdrop-blur-xl bg-[#0A0A0A]/70 border border-white/10 rounded-full mx-auto mt-6 px-6 py-3 max-w-fit sticky top-6 z-50",
+    "bento_card": "bg-[#141414] border border-white/5 rounded-3xl p-8 overflow-hidden relative group hover:border-[#1A6B3C]/50 transition-colors duration-500",
+    "button": "bg-[#1A6B3C] text-white px-8 py-4 rounded-full font-medium hover:bg-[#155a30] transition-colors"
+  },
+  "sections": [
+    {
+      "name": "Floating Nav",
+      "details": "Sticky top, z-50, glassmorphism, brand logo (Al-Qudwah), minimal links."
+    },
+    {
+      "name": "Split Hero",
+      "details": "Left side: impactful typography (Outfit) + Arabic accent phrase (Amiri). Right side: Large portrait (1.png) taking up full height with slight parallax."
+    },
+    {
+      "name": "Identity Reel",
+      "details": "Horizontal scroll section with 8 panels revealing Faris's story. Uses Faris photos (2.png, 3.png) + dark text panels."
+    },
+    {
+      "name": "Philosophy",
+      "details": "Dark background with CSS/SVG based Islamic geometric pattern overlay (very low opacity). Pinned text that highlights as user scrolls."
+    },
+    {
+      "name": "Programs Bento Grid",
+      "details": "5 asymmetric cards showcasing coaching programs. Hover effects with subtle green glow. Image 4.png used in the main span-2 card."
+    },
+    {
+      "name": "Proof Strip",
+      "details": "Testimonials section. Left side sticky with Section Title 'Impact', scrolling right side with sleek testimonial cards."
+    },
+    {
+      "name": "Camping Immersive",
+      "details": "Full screen section with desert camping background image (from unsplash/pexels). Floating glass-morphism cards revealing Faris's retreats."
+    },
+    {
+      "name": "Voice Ticker",
+      "details": "2 rows of auto-scrolling marquee containing short testimonial quotes. One moving left, one right."
+    },
+    {
+      "name": "CTA & Footer",
+      "details": "Minimalist CTA section with large typography leading into a clean, dark footer with large Al-Qudwah logo."
+    }
+  ],
+  "media": {
+    "images": [
+      {
+        "url": "/1.png",
+        "category": "Hero",
+        "description": "Faris portrait 1 for Hero section"
+      },
+      {
+        "url": "/2.png",
+        "category": "Identity Reel",
+        "description": "Faris portrait 2 for horizontal scroll panels"
+      },
+      {
+        "url": "/3.png",
+        "category": "Identity Reel",
+        "description": "Faris portrait 3 for horizontal scroll panels"
+      },
+      {
+        "url": "/4.png",
+        "category": "Bento Grid",
+        "description": "Faris portrait 4 for the main program card"
+      },
+      {
+        "url": "https://images.pexels.com/photos/11181888/pexels-photo-11181888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "Camping Section Background",
+        "description": "A glowing glamping tent set against a starry night sky in the Dubai desert"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Build a pure static single-page landing page in React (no backend).",
+    "Install `@studio-freight/react-lenis` for smooth scrolling and wrap the main app.",
+    "Install `gsap` and `@gsap/react` for complex animations.",
+    "Use Google Fonts: Outfit (Display/Headings), Manrope (Body), Amiri (Arabic Accents).",
+    "Use native HTML/Tailwind for custom layouts (like the Bento Grid and Horizontal Scroll) rather than restrictive Shadcn components.",
+    "For the Islamic geometric pattern, use a subtle repeating radial gradient or an inline SVG data URI as a background image with ~5% opacity.",
+    "Implement the Horizontal Scroll using GSAP ScrollTrigger pinned container.",
+    "All interactive elements MUST have data-testid attributes (e.g. data-testid=\"nav-link-about\").",
+    "Rely exclusively on the provided media URLs, do not use generic placeholder image services.",
+    "Use English primarily, adding Arabic phrases (in Amiri font) only as decorative accents (e.g., 'القدوة' for Al-Qudwah) with absolute positioning or soft overlays."
+  ]
+}
