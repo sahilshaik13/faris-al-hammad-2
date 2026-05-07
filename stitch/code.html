@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atelier Arc - Bespoke Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-utilities">
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hero-mask {
+      mask-image: radial-gradient(ellipse at bottom, transparent 15%, black 20%);
+      -webkit-mask-image: radial-gradient(ellipse at bottom, transparent 15%, black 20%);
+    }
+    .carousel-container {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .carousel-container::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .carousel-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    
+    /* Perspective for 3D effect on carousel items */
+    .perspective-container {
+      perspective: 1000px;
+    }
+    .card-3d-left {
+      transform: rotateY(15deg) translateZ(-50px);
+    }
+    .card-3d-center {
+      transform: rotateY(0deg) translateZ(0);
+      z-index: 10;
+    }
+    .card-3d-right {
+      transform: rotateY(-15deg) translateZ(-50px);
+    }
+
+    /* Functional infinite carousel */
+    .carousel-viewport {
+      overflow: hidden;
+      width: 100%;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+      padding: 2.5rem 0;
+    }
+    .carousel-viewport:active {
+      cursor: grabbing;
+    }
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      will-change: transform;
+    }
+    .carousel-item {
+      flex: 0 0 auto;
+      transition: transform 280ms ease, filter 280ms ease, opacity 280ms ease;
+      transform-origin: center center;
+      opacity: 0.78;
+      filter: saturate(0.9);
+    }
+    .carousel-item.is-active {
+      transform: scale(1.08) translateY(-6px);
+      opacity: 1;
+      filter: saturate(1.05);
+      z-index: 20;
+    }
+  </style>
+</head>
+<body class="bg-[#1a1a1a] text-white overflow-x-hidden">
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-6 left-1/2 transform -translate-x-1/2 w-[90%] max-w-5xl z-50 rounded-full glass-nav px-6 py-4 flex items-center justify-between" data-purpose="main-navigation">
+<!-- Home Icon / Logo Area -->
+<a aria-label="Home" class="text-white hover:text-gray-300 transition-colors" href="#">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<!-- Nav Links -->
+<div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+<a class="text-white hover:text-gray-300 transition-colors" href="#">Work</a>
+<a class="text-white hover:text-gray-300 transition-colors" href="#">Studio</a>
+<a class="text-white hover:text-gray-300 transition-colors" href="#">Journal</a>
+</div>
+<!-- CTA Button -->
+<a class="bg-white text-black px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors shadow-lg" href="#">
+      Collaborate
+    </a>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: Main Content -->
+<main class="relative min-h-screen w-full flex flex-col items-center pt-4 px-4 pb-20">
+<!-- BEGIN: Hero Background & Content -->
+<!-- The main hero container with rounded corners and background image -->
+<section class="relative w-full max-w-7xl h-[85vh] rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-center mt-20" data-purpose="hero-section">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 w-full h-full">
+<img alt="Desert landscape with rocks" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACGlF0BE9_0NaGWpZuGqHUu9PY9JqjiA-ErgKXOf33WI0-U2u0ZVmMYUvfOlaWxr27CRiTwUEsNZGjoS5dctxMxzNV-PP35vOI4OEDriN5cBq1r_34XA20kHLn0DDQCTiCLj3Y_xyRI-S7NSQMzUxU1BaHmYxeIFDfji_NnwXkdLvNb33JISch-5XXB6MP4dHbIau7jBeRNQ9okRLrovPtexSt-4wmxV7sIpE5o5lJw-iEcCVwx60tF7uYhKJNGyGBT8swAhI0-sTX"/>
+<div class="absolute inset-0 bg-black/30"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<!-- Hero Text Content -->
+<div class="relative z-10 max-w-3xl px-6 flex flex-col items-center space-y-6 mt-[-10vh]">
+<h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
+          Atelier Arc
+        </h1>
+<p class="text-lg md:text-xl text-gray-200 max-w-2xl font-light drop-shadow-md">
+          Bespoke architecture and spatial design for modern homes and thoughtful living.
+        </p>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+<a class="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-gray-100 transition-colors shadow-lg" href="#">
+            Portfolio
+          </a>
+<a class="glass-nav text-white px-8 py-3 rounded-full text-base font-medium hover:bg-white/30 transition-colors" href="#">
+            Approach
+          </a>
+</div>
+</div>
+</section>
+<!-- END: Hero Background & Content -->
+<!-- BEGIN: Portfolio Carousel -->
+<!-- This section overlaps the hero section slightly to create the curved bottom effect -->
+<section class="relative w-full max-w-[1400px] -mt-32 z-20 perspective-container" data-purpose="portfolio-carousel">
+<div class="carousel-viewport px-4" data-carousel-viewport>
+<div class="carousel-track" data-carousel-track>
+<!-- Card 1 -->
+<div class="carousel-item carousel-card w-[220px] md:w-[260px] h-[330px] md:h-[390px] rounded-3xl overflow-hidden shadow-2xl relative">
+<img alt="Modern house exterior" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgzO_3cPG3P8lSRJP9RLaGFkwlqitQPSX8k312HGHZ4KA0rKtoFbhXciHaB1T5OjC3ydNa5UQLfJbnkn9wJBaEwwmn5TUofRZzPV6VjGCu5TlDUi532TGT32nFZk2_e9hnndGi8-RBkOlSSzNTG09w_EY8jfVFYJ8F0s4ehlr2xHtQfdpFtD4kwWsnuu7Bn1phqQAAvhPD8ZsR4QZ-qciyYa4w3Zw9gwWMShHMMDSjjhJZc2_kC6yFjYKIiyo3yLQhU6hq9bY7qyDH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<h3 class="text-white text-xl font-medium">Desert Pavilion</h3>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="carousel-item carousel-card w-[200px] md:w-[225px] h-[300px] md:h-[340px] rounded-[2rem] overflow-hidden shadow-2xl relative">
+<img alt="Modern architecture twilight" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_qtWXB7DAhXr-b2qSf1D-NIkcOPmjFkSNWxdelrLJePJbYEYjETcXHKYIetWNXGGbj1ItBU8QaaM3qnWeB6qvXg0wRWH4KU5xJCorhFz9Ac8xTEoBKKbw2Po5DpJSmyX6YcB0LGLaFHJRz_aL2MGyqsm03vlsVm1qA1M3So0JGzyc7y4MFgqaIS_auEjqLoDhwky2Ex0MwykvqdmzV4XFL9XaX1bdUcmB55ejswTItWsLPU0faf-reqUwRus7Ve82iaFwi8lnqjrN"/>
+</div>
+<!-- Card 3 (Center focus) -->
+<div class="carousel-item carousel-card w-[240px] md:w-[285px] h-[360px] md:h-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl relative border border-white/20">
+<img alt="Minimalist house design" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0DB1su5YFKSe-09JBJv3-MrTkbLu7PfhEAK2L9IMleoLG3yJs_IPvyswZMJMGxkyGHUMg3x2S1i4ngfNGBYEe9HFu5f83GgFrQY-7mzPgVPHg_dR80dcfU1E_6p8i6x3siV5Ojeu_7EWiHbggc0dtMfOrbcbdmboDOOqRj3EHsVL87-pF0aGLLuAZdIU4SM-8-oOcSClnzZNJ7Be9Jk4hMUK_GsBIMoHGd7mt20GgeXity97kKhC8G5HcPVfdMYHn89ojoyfRXETl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
+<span class="text-xs uppercase tracking-widest text-gray-300 mb-2">Featured Project</span>
+<h3 class="text-white text-2xl font-semibold mb-2">Oasis Residence</h3>
+<p class="text-gray-300 text-sm line-clamp-2">A seamless blend of indoor and outdoor living in the arid landscape.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="carousel-item carousel-card w-[200px] md:w-[225px] h-[300px] md:h-[340px] rounded-[2rem] overflow-hidden shadow-2xl relative">
+<img alt="Architectural details" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClEzUoypXP3z12-2eBRXQAcCEb9p1TMJpRn08XjI3Oap024LFBosWlbcv7kptgKaBMm-aWKg4Z4ms38M2vMc3YbU4sZ2HgY35BW41SpXUS7BiHuwHiahENIHM5-jOaWjeAc1moiMYqeZvbGQqmnfrDrESRoZCmPWoHbO10T5DXAp-3qznRA-U4g2qgxw2UGHeApj9pP5fhHX_N2RDz2BmIolHxxh7uk6-HKfGs6kUzZySHwAE3malskxR4w_dry2TOTvYAB3Xrx1LM"/>
+</div>
+<!-- Card 5 -->
+<div class="carousel-item carousel-card w-[220px] md:w-[260px] h-[330px] md:h-[390px] rounded-3xl overflow-hidden shadow-2xl relative">
+<img alt="Curved modern architecture" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSBOIHjyQWOlqpDZxGUmxMV0Y2oN6T0DnKkEYdHlELDQM8hZjkDhiqS-_gN5ongV8SU0azRH-0dtZL64imArQKpvXKgKcYbEXcRnvPB_UPQg4u2XgkGMPvqEOVAGfPbTglSTUud-sFNcGXCVakliDuXiuRjCpcUXdwiGB-jCrckstvMj4YZNyi1EsQ1FOP_G1TyDQ8IKR_6S5em1f99oMeJJ25XTvS2-0WeBw5j_tZZ3EZ3VD-qgOH0oSxWJUSK9PaOTHC03YBtYDU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<h3 class="text-white text-xl font-medium">The Arc House</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Portfolio Carousel -->
+</main>
+<!-- END: Main Content -->
+<script>
+  (() => {
+    const viewport = document.querySelector("[data-carousel-viewport]");
+    const track = document.querySelector("[data-carousel-track]");
+    if (!viewport || !track) return;
+
+    const originals = Array.from(track.children);
+    const originalCount = originals.length;
+    if (!originalCount) return;
+
+    // Clone both sides for seamless infinite loop.
+    originals.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      track.appendChild(clone);
+    });
+    originals.slice().reverse().forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      track.insertBefore(clone, track.firstChild);
+    });
+
+    let index = originalCount;
+    let step = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startTranslate = 0;
+    let wheelLock = false;
+
+    function computeStep() {
+      const first = track.children[0];
+      if (!first) return;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || "0");
+      step = first.getBoundingClientRect().width + gap;
+      currentX = -index * step;
+      track.style.transition = "none";
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+      requestAnimationFrame(() => {
+        track.style.transition = "transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+      });
+      updateActive();
+    }
+
+    function normalizeIndex() {
+      if (index >= originalCount * 2) {
+        index -= originalCount;
+        track.style.transition = "none";
+        currentX = -index * step;
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        requestAnimationFrame(() => {
+          track.style.transition = "transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+        });
+      } else if (index < originalCount) {
+        index += originalCount;
+        track.style.transition = "none";
+        currentX = -index * step;
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        requestAnimationFrame(() => {
+          track.style.transition = "transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+        });
+      }
+    }
+
+    function updateActive() {
+      const all = Array.from(track.children);
+      all.forEach((item) => item.classList.remove("is-active"));
+      const active = all[index];
+      if (active) active.classList.add("is-active");
+    }
+
+    function snapTo(i) {
+      index = i;
+      currentX = -index * step;
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+      updateActive();
+    }
+
+    function next() {
+      snapTo(index + 1);
+    }
+
+    function prev() {
+      snapTo(index - 1);
+    }
+
+    track.addEventListener("transitionend", () => {
+      normalizeIndex();
+      updateActive();
+    });
+
+    viewport.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+        if (wheelLock) return;
+        const dominant = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        if (Math.abs(dominant) < 8) return;
+        wheelLock = true;
+        dominant > 0 ? next() : prev();
+        setTimeout(() => {
+          wheelLock = false;
+        }, 220);
+      },
+      { passive: false }
+    );
+
+    viewport.addEventListener("pointerdown", (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startTranslate = currentX;
+      track.style.transition = "none";
+      viewport.setPointerCapture(e.pointerId);
+    });
+
+    viewport.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      currentX = startTranslate + dx;
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+    });
+
+    function endDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      viewport.releasePointerCapture(e.pointerId);
+      const moved = currentX - startTranslate;
+      track.style.transition = "transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+      if (moved < -step * 0.18) {
+        next();
+      } else if (moved > step * 0.18) {
+        prev();
+      } else {
+        snapTo(index);
+      }
+    }
+
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
+
+    window.addEventListener("resize", computeStep);
+    computeStep();
+  })();
+</script>
+</body></html>
